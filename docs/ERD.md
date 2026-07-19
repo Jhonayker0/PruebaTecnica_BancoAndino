@@ -12,8 +12,15 @@ erDiagram
         boolean activa  "SI | NO"
     }
 
+    NIVEL_ACCESO {
+        int id PK
+        string nombre UK
+        string descripcion
+    }
+
     EMPLEADO {
-        string codigo_empleado PK
+        int id PK
+        string codigo_empleado
         string primer_nombre
         string segundo_nombre
         string primer_apellido
@@ -24,7 +31,7 @@ erDiagram
         string email
         string telefono
         string id_biostar
-        string nivel_acceso
+        int nivel_acceso_id FK
     }
 
     EMPLEADO_SEDE {
@@ -36,13 +43,16 @@ erDiagram
     REGISTRO_ACCESO {
         int id PK
         int empleado_sede_id FK
+        string codigo_sede FK
         string tipo_movimiento "Entrada|Salida"
         datetime fecha_hora
     }
 
+    NIVEL_ACCESO ||--o{ EMPLEADO : "1 a muchos"
     EMPLEADO ||--|{ EMPLEADO_SEDE : "1 a muchos"
     SEDE ||--|{ EMPLEADO_SEDE : "1 a muchos"
     EMPLEADO_SEDE ||--o{ REGISTRO_ACCESO : "0..N registros"
+    SEDE ||--o{ REGISTRO_ACCESO : "1 a muchos"
 ```
 
 ## Cambios respecto al archivo de Excel
@@ -56,6 +66,10 @@ Se descartaron los siguientes campos referentes a los empleados:
 Se han definido campos obligatorios y opcionales, esto con el fin de rechazar el registro solo de aquellos empleados a quienes le falte información crucial:
 - Obligatorio: Codigo_empleado, Primer_nombre, Primer_apellido, Tipo_documento, Numero_documento, Estado, Id_biostar, Nivel_acceso.
 - Opcionales: Segundo_nombre, Segundo_apellido, Email, Telefono.
+
+El campo `nivel_acceso` no se manejará como texto libre. Se normalizará mediante un catálogo de niveles de acceso.
+
+En Empleado_Sede (codigo_sede+codigo_empleado) funciona como unique para evitar duplicados del mismo empleado en la misma sede.
 
 ### Adiciones
 Se añadieron 2 entidades: 
