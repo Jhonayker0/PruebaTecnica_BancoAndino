@@ -64,6 +64,7 @@
 5. Se menciono que había un espacio en el que se debía validar que no hubiesen más de 8 personas al tiempo. Pero por recomendación del cliente se reportará solo la cantidad de trabajadores por sede en la versión inicial.
 6. Se tomará como error en la construcción del archivo de talento humano lo dicho en el punto 5 de preguntas para el cliente.
 7. A este sistema no le compete cambiar los estados de los empleados (Activo/Inactivo/Retirado), solo registrarlos o actualizarlos.
+8. Se asume que el estado **Retirado** es uno diferente a Activo/Inactivo, pudiendo ser exclusivo para personas jubiladas/retiradas. Se asumirá que ni los retirados ni los inactivos pueden ingresar.
 
 ## Preguntas para el cliente
 
@@ -75,3 +76,5 @@
 3. ¿Qué campos se consideran obligatorios para aceptar un empleado en la base de datos y cuáles podrán quedar opcionales inicialmente?
 4. ¿Se espera soportar contratistas en el modelo inicial o solo en una futura ampliación? Luego de mencionar que se los van a solicitar, me gustaría una confirmación.
 5. En el archivo de talento humano existen varias personas (diferentes nombres) para el mismo número, tipo de documento y país. Por ejemplo: 79458122, siendo Miguel Elena y Monica Isabel. ¿Cómo debe ser tratado esto?
+6. ¿Que implica el nivel de acceso con el que cuenta cada usuario?
+7. En los datos de los empleados hay uno solo que se encuentra con un estado diferente a Activo o Inactivo (Retirado) ¿Es un estado diferente o es un error?

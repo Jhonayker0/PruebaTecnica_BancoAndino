@@ -74,7 +74,7 @@ También se descarta una versión muy estricta de arquitectura hexagonal, aunque
 - Exige más diseño inicial y más abstracciones.
 - Si se lleva al extremo, puede ralentizar la implementación del MVP.
 
-## Técnologias seleccionadas
+## Tecnologías seleccionadas
 
 ### Frontend
 Siguiendo las indicaciones del cliente se utilizará React.
@@ -83,7 +83,7 @@ Siguiendo las indicaciones del cliente se utilizará React.
 Siguiendo las indicaciones del cliente se utilizará PostgreSQL.
 
 ### Contenerización
-Siguiento las indicaciones del cliente se utilizará Docker.
+Siguiendo las indicaciones del cliente se utilizará Docker.
 
 ### Backend
 Como tecnología base para el backend se seleccionó Node.js junto con NestJS. Durante la evaluación también se consideró FastAPI con Python, ya que cumplía con los requisitos técnicos del proyecto; sin embargo, se optó por mantener un ecosistema unificado basado en TypeScript, facilitando la consistencia entre el frontend y el backend, así como el mantenimiento del proyecto.
