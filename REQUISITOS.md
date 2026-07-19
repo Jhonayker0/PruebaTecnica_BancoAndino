@@ -62,13 +62,16 @@
 3. El catálogo de sedes y la relación usuario<->sede serán parte del modelo de datos base.
 4. La identificación del usuario deberá considerar más de un atributo cuando sea necesario, no solo el número de documento.
 5. Se menciono que había un espacio en el que se debía validar que no hubiesen más de 8 personas al tiempo. Pero por recomendación del cliente se reportará solo la cantidad de trabajadores por sede en la versión inicial.
+6. Se tomará como error en la construcción del archivo de talento humano lo dicho en el punto 5 de preguntas para el cliente.
+7. A este sistema no le compete cambiar los estados de los empleados (Activo/Inactivo/Retirado), solo registrarlos o actualizarlos.
 
 ## Preguntas para el cliente
 
 1. ¿Un usuario con estado diferente de **Activo** (Inactivo o Retirado) puede ingresar a una sede?
 2. En el archivo de Talento Humano existen usuarios activos con fecha de retiro e inactivos o retirados sin fecha de retiro.
-   - ¿Cuál de estos casos corresponde a un error en los datos?
+   - ¿Alguno de estos casos corresponde a un error en los datos?
    - ¿Cuál debería ser el comportamiento esperado del sistema?
    - ¿Debe prevalecer el estado del empleado o la fecha de retiro al momento de registrar la información?
 3. ¿Qué campos se consideran obligatorios para aceptar un empleado en la base de datos y cuáles podrán quedar opcionales inicialmente?
-4. ¿Se espera soportar contratistas en el modelo inicial o solo en una futura ampliación?
+4. ¿Se espera soportar contratistas en el modelo inicial o solo en una futura ampliación? Luego de mencionar que se los van a solicitar, me gustaría una confirmación.
+5. En el archivo de talento humano existen varias personas (diferentes nombres) para el mismo número, tipo de documento y país. Por ejemplo: 79458122, siendo Miguel Elena y Monica Isabel. ¿Cómo debe ser tratado esto?
