@@ -95,6 +95,7 @@ Se seleccionó Prisma ORM como herramienta de acceso a datos por su integración
 
 ## Diagrama de Componentes
 
+```mermaid
 graph TD
 
 A[Frontend - React]
@@ -138,3 +139,4 @@ I --> K
 K --> M
 
 J --> L
+```
