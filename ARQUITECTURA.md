@@ -82,4 +82,10 @@ Siguiendo las indicaciones del cliente se utilizará React.
 ### Base de datos
 Siguiendo las indicaciones del cliente se utilizará PostgreSQL.
 
+### Contenerización
+Siguiento las indicaciones del cliente se utilizará Docker.
+
 ### Backend
+Como tecnología base para el backend se seleccionó Node.js junto con NestJS. Durante la evaluación también se consideró FastAPI con Python, ya que cumplía con los requisitos técnicos del proyecto; sin embargo, se optó por mantener un ecosistema unificado basado en TypeScript, facilitando la consistencia entre el frontend y el backend, así como el mantenimiento del proyecto.
+
+Respecto al framework, se evaluaron Express y NestJS. Aunque Express ofrece una gran flexibilidad para estructurar una aplicación, se decidió utilizar NestJS por su mejor alineación con la arquitectura propuesta. Su enfoque modular, la separación clara de responsabilidades, la inyección de dependencias y la organización mediante módulos, controladores y servicios permiten implementar de forma natural un monolito modular con principios hexagonales, favoreciendo la mantenibilidad, la escalabilidad y la evolución del sistema sin introducir una complejidad innecesaria. 
