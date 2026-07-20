@@ -1,70 +1,47 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from '../../prisma/prisma.service';
+import { DuplicateEntityError } from '../../common/exceptions/repository-exceptions';
+import { AssignmentsRepository } from './repositories/assignments.repository';
 import { AssignEmployeeToSiteDto } from './dto/assign-employee-to-site.dto';
 
 @Injectable()
 export class AssignmentsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly assignmentsRepository: AssignmentsRepository) {}
 
   async assignEmployeeToSite(assignEmployeeToSiteDto: AssignEmployeeToSiteDto) {
     try {
-      return await this.prisma.employeeSite.create({
-        data: {
-          employeeId: assignEmployeeToSiteDto.employeeId,
-          siteId: assignEmployeeToSiteDto.siteId,
-        },
-        include: {
-          employee: true,
-          site: true,
-        },
-      });
-    } catch (error: unknown) {
-      this.handlePrismaError(error);
+      return await this.assignmentsRepository.create(assignEmployeeToSiteDto.employeeId, assignEmployeeToSiteDto.siteId);
+    } catch (error) {
+      this.handleRepositoryError(error);
     }
   }
 
   findSitesByEmployee(employeeId: number) {
-    return this.prisma.employeeSite.findMany({
-      where: { employeeId },
-      include: {
-        site: true,
-      },
-      orderBy: { createdAt: 'desc' },
-    });
+    return this.assignmentsRepository.findSitesByEmployee(employeeId);
   }
 
   findEmployeesBySite(siteId: number) {
-    return this.prisma.employeeSite.findMany({
-      where: { siteId },
-      include: {
-        employee: true,
-      },
-      orderBy: { createdAt: 'desc' },
-    });
+    return this.assignmentsRepository.findEmployeesBySite(siteId);
   }
 
   async removeAssignment(id: number) {
-    const assignment = await this.prisma.employeeSite.findUnique({ where: { id }, select: { id: true } });
+    const assignment = await this.assignmentsRepository.findById(id);
 
     if (!assignment) {
       throw new NotFoundException(`Assignment with id ${id} not found`);
     }
 
-    return this.prisma.employeeSite.delete({ where: { id } });
+    return this.assignmentsRepository.delete(id);
   }
 
-  private handlePrismaError(error: unknown): never {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === 'P2002') {
-        throw new ConflictException('Employee is already assigned to this site');
-      }
-
-      if (error.code === 'P2025') {
-        throw new NotFoundException('Employee or site not found');
-      }
+  private handleRepositoryError(error: unknown): never {
+    if (error instanceof DuplicateEntityError) {
+      throw new ConflictException('Employee is already assigned to this site');
     }
 
-    throw error instanceof Error ? error : new Error('Unexpected Prisma error');
+    if (error instanceof Error && error.message === 'Employee or site not found') {
+      throw new NotFoundException('Employee or site not found');
+    }
+
+    throw error instanceof Error ? error : new Error('Unexpected repository error');
   }
 }
