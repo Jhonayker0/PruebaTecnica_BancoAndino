@@ -65,6 +65,7 @@
 6. Se tomará como error en la construcción del archivo de talento humano lo dicho en el punto 5 de preguntas para el cliente.
 7. A este sistema no le compete cambiar los estados de los empleados (Activo/Inactivo/Retirado), solo registrarlos o actualizarlos.
 8. Se asume que el estado **Retirado** es uno diferente a Activo/Inactivo, pudiendo ser exclusivo para personas jubiladas/retiradas. Se asumirá que ni los retirados ni los inactivos pueden ingresar.
+9. Se asumirá la lista de niveles de acceso y documentos como los diferentes datos que se encuentran en el excel.
 
 ## Preguntas para el cliente
 
@@ -78,3 +79,4 @@
 5. En el archivo de talento humano existen varias personas (diferentes nombres) para el mismo número, tipo de documento y país. Por ejemplo: 79458122, siendo Miguel Elena y Monica Isabel. ¿Cómo debe ser tratado esto?
 6. ¿Que implica el nivel de acceso con el que cuenta cada usuario?
 7. En los datos de los empleados hay uno solo que se encuentra con un estado diferente a Activo o Inactivo (Retirado) ¿Es un estado diferente o es un error?
+8. ¿Cuales son todos los diferentes tipos de documentos con los que una permisa puede estar identificada? ¿Cuales son los diferentes niveles de acceso que un usuario puede tener?
