@@ -32,6 +32,8 @@ Si contase con más tiempo, los puntos que priorizaría serían:
 
 - Ampliar el sistema para gestionar contratistas y visitantes, reutilizando la arquitectura implementada para la gestión de empleados.
 
+- Gestión de niveles de acceso y permisos del usuario (preguntarle al cliente)
+
 - Hacerle preguntas al cliente para extender el control de aforo y soportar niveles como pisos o áreas, manteniendo la lógica desarrollada para el control por sedes.
 
 - Documentar más a detalle el código, sus servicios, módulos, etc.

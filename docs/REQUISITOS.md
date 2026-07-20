@@ -66,6 +66,7 @@
 7. A este sistema no le compete cambiar los estados de los empleados (Activo/Inactivo/Retirado), solo registrarlos o actualizarlos.
 8. Se asume que el estado **Retirado** es uno diferente a Activo/Inactivo, pudiendo ser exclusivo para personas jubiladas/retiradas. Se asumirá que ni los retirados ni los inactivos pueden ingresar.
 9. Se asumirá la lista de niveles de acceso y documentos como los diferentes datos que se encuentran en el excel.
+10. La API de BioStar consume idBioStar y una contraseña, se asumirá que la contraseña es el mismo número de documento. Por lo que el login del sistema creado será dos veces el documento.
 
 ## Preguntas para el cliente
 
