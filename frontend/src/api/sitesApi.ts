@@ -1,5 +1,6 @@
 import { httpClient } from './httpClient';
-import type { EmployeeStatus } from './employeesApi';
+
+export type SiteStatus = 'ACTIVE' | 'INACTIVE';
 
 export interface SitePayload {
   siteCode: string;
@@ -7,13 +8,13 @@ export interface SitePayload {
   city: string;
   country: string;
   address: string;
-  status?: EmployeeStatus;
+  status?: SiteStatus;
 }
 
 export interface UpdateSitePayload extends Partial<SitePayload> {}
 
 export interface ChangeSiteStatusPayload {
-  status: EmployeeStatus;
+  status: SiteStatus;
 }
 
 export const sitesApi = {

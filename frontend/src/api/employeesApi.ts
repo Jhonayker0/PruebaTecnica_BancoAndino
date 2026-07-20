@@ -1,7 +1,7 @@
 import { httpClient } from './httpClient';
-import type { TypeDoc } from './catalogsApi';
+import type { EmployeeStatus, TypeDoc } from './catalogsApi';
 
-export type EmployeeStatus = 'ACTIVE' | 'INACTIVE' | 'RETIRED';
+export type { EmployeeStatus, TypeDoc } from './catalogsApi';
 export type LevelAccess = 'STANDARD' | 'RESTRICTED' | 'TOTAL' | 'INTERNAL_VISITOR' | 'SUPERUSER';
 
 export interface EmployeePayload {

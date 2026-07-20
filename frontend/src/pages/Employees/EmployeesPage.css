@@ -1,0 +1,279 @@
+/* Reutiliza las variables y layout base definidos en .access-app (Home.css):
+   --bg-panel, --border-subtle, --accent-gold, --danger, --font-*, .menu-trigger,
+   .action-icon, .field-select, .field-input, .field-scan, .field-submit, etc. */
+
+.empleados-main {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+  box-sizing: border-box;
+}
+
+.empleados-card {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 44px 40px 40px;
+  box-shadow: 0 30px 70px rgba(3, 7, 15, 0.5);
+}
+
+/* Selector de acción: 4 botones en cuadrícula 2x2 */
+
+.action-row-quad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Iconos de acción (mismo lenguaje visual que .action-icon-in / .action-icon-out) */
+
+.action-icon-add::before,
+.action-icon-add::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.action-icon-add::before {
+  width: 10px;
+  height: 1.5px;
+  top: 6.25px;
+  left: 2px;
+}
+.action-icon-add::after {
+  width: 1.5px;
+  height: 10px;
+  top: 2px;
+  left: 6.25px;
+}
+
+.action-icon-search::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+}
+.action-icon-search::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 1.5px;
+  background: currentColor;
+  top: 9px;
+  left: 8px;
+  transform: rotate(45deg);
+}
+
+.action-icon-refresh::before {
+  content: '';
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  border-right-color: transparent;
+  top: 1.5px;
+  left: 1.5px;
+}
+.action-icon-refresh::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 4px solid currentColor;
+  top: -1px;
+  right: 0;
+  transform: rotate(50deg);
+}
+
+.action-icon-toggle::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 8px;
+  border: 1.5px solid currentColor;
+  border-radius: 5px;
+  top: 3px;
+  left: 0;
+}
+.action-icon-toggle::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  top: 5px;
+  left: 8px;
+}
+
+/* Formulario de empleado: filas de dos columnas para nombres/contacto */
+
+.field-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field-select-full {
+  width: 100%;
+}
+
+.field-submit-full {
+  width: 100%;
+}
+
+.field-submit-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fdf3f1;
+}
+
+.field-submit-secondary {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+}
+
+.field-submit-secondary:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.field-button-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.employee-feedback {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  border: 1px solid transparent;
+}
+
+.employee-feedback-error {
+  background: rgba(184, 67, 41, 0.16);
+  border-color: rgba(184, 67, 41, 0.35);
+  color: #ffd6cf;
+}
+
+.employee-feedback-success {
+  background: rgba(120, 168, 79, 0.14);
+  border-color: rgba(120, 168, 79, 0.35);
+  color: #e4f7d6;
+}
+
+.employee-results {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.employee-results-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.employee-results-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.employee-results-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.employee-result-card {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(8, 12, 20, 0.42);
+  border: 1px solid var(--border-subtle);
+}
+
+.employee-result-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.employee-result-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.employee-result-meta {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.employee-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(227, 184, 70, 0.14);
+  border: 1px solid rgba(227, 184, 70, 0.3);
+  color: var(--accent-gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.employee-result-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+@media (max-width: 480px) {
+  .empleados-card {
+    padding: 34px 22px 30px;
+  }
+
+  .field-pair,
+  .field-button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .employee-results-head,
+  .employee-result-top {
+    flex-direction: column;
+  }
+
+  .employee-result-actions {
+    justify-content: stretch;
+  }
+
+  .employee-result-actions .field-submit-secondary {
+    width: 100%;
+  }
+}
