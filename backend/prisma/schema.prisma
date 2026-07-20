@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+  url = env("DATABASE_URL")
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  RETIRED
+}
+
+enum TypeDoc {
+  CC
+  CE
+  PAS
+  CIP
+}
+
+enum LevelAccess {
+  STANDARD
+  RESTRICTED
+  TOTAL
+  INTERNAL_VISITOR
+  SUPERUSER
+}
+
+enum MovementType {
+  ENTRY
+  EXIT
+}
+
+model Employee {
+  id              Int           @id @default(autoincrement())
+  employeeCode    String        @unique
+  firstName       String
+  middleName      String?
+  lastName        String
+  secondLastName  String?
+  typeDoc         TypeDoc
+  documentNumber  String
+  status          Status        @default(ACTIVE)
+  email           String?       @unique
+  phone           String?
+  biostarId       String?       @unique
+  levelAccess     LevelAccess
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  employeeSites   EmployeeSite[]
+
+  @@unique([typeDoc, documentNumber])
+  @@map("employee")
+}
+
+model Site {
+  id          Int            @id @default(autoincrement())
+  siteCode    String         @unique
+  name        String
+  city        String
+  country     String
+  address     String
+  status      Status         @default(ACTIVE)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  employeeSites EmployeeSite[]
+
+  @@map("site")
+}
+
+model EmployeeSite {
+  id          Int           @id @default(autoincrement())
+  employeeId  Int
+  siteId      Int
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  employee    Employee      @relation(fields: [employeeId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  site        Site          @relation(fields: [siteId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  accessLogs  AccessLog[]
+
+  @@unique([employeeId, siteId])
+  @@index([employeeId])
+  @@index([siteId])
+  @@map("employeeSite")
+}
+
+model AccessLog {
+  id             Int           @id @default(autoincrement())
+  employeeSiteId Int
+  movementType   MovementType
+  occurredAt     DateTime      @default(now())
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  employeeSite   EmployeeSite  @relation(fields: [employeeSiteId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([employeeSiteId])
+  @@map("accessLog")
+}
