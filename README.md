@@ -86,3 +86,13 @@ docker compose down
 
 ### Dashboard
 <img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\dashboard.png" alt="Dashboard" width="800" />
+
+## Documentos Adicionales
+Los entregables solicitados junto cos los chats con IA se encuentran dentro de la carpeta /docs/
+Además, adjunto todo el material de apoyo utilizado y creado durante el desarrollo de este proyecto.
+
+---
+
+Ha sido un gusto desarrollar esta prueba técnica y espero les sea de su agrado, gracias por la oportunidad.
+
+Jhonayker Echeverria Barragan.
