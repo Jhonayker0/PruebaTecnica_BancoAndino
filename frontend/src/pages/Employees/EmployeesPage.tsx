@@ -710,8 +710,10 @@ export function EmployeesPage() {
                         <p className="employee-result-meta">
                           {employee.employeeCode} · {employee.typeDoc} {employee.documentNumber}
                         </p>
+                        <p className="employee-result-meta">
+                          {employee.status}
+                        </p>
                       </div>
-                      <span className="employee-chip">{employee.status}</span>
                     </div>
 
                     <p className="employee-result-meta">

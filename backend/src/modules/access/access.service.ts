@@ -2,10 +2,14 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { MovementType, Status } from '@prisma/client';
 import { AccessRepository, AccessLogWithRelations } from './repositories/access.repository';
 import { RegisterAccessDto } from './dto/register-access.dto';
+import { BiostarService } from '../biostar/biostar.service';
 
 @Injectable()
 export class AccessService {
-  constructor(private readonly accessRepository: AccessRepository) {}
+  constructor(
+    private readonly accessRepository: AccessRepository,
+    private readonly biostarService: BiostarService,
+  ) {}
 
   registerEntry(registerAccessDto: RegisterAccessDto) {
     return this.registerMovement(registerAccessDto, MovementType.ENTRY);
@@ -96,6 +100,11 @@ export class AccessService {
       if (latestMovement?.movementType === MovementType.ENTRY) {
         throw new BadRequestException('No se puede ingresar porque tu último movimiento fue ingreso');
       }
+
+      this.biostarService.login({
+        documentNumber: employeeSite.employee.documentNumber,
+        password: employeeSite.employee.documentNumber,
+      });
     }
 
     if (movementType === MovementType.EXIT) {
@@ -108,7 +117,15 @@ export class AccessService {
       }
     }
 
-    return this.accessRepository.createMovement(employeeSite.id, movementType);
+    const movement = await this.accessRepository.createMovement(employeeSite.id, movementType);
+
+    if (movementType === MovementType.EXIT) {
+      this.biostarService.logout({
+        documentNumber: employeeSite.employee.documentNumber,
+      });
+    }
+
+    return movement;
   }
 
   private async getLatestMovementForEmployeeSite(employeeId: number, siteId: number) {

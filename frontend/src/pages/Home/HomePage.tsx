@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { accessApi, catalogsApi, employeesApi, sitesApi, type DocumentTypeOption } from '../../api';
+import { accessApi, biostarApi, catalogsApi, employeesApi, sitesApi, type DocumentTypeOption } from '../../api';
 import Sidebar from './Sidebar';
 import './HomePage.css';
 
@@ -137,6 +137,11 @@ export function HomePage() {
       }
 
       const employee = await findEmployeeByDocument(ingresoForm.tipoDocumento, ingresoForm.numeroDocumento);
+
+      await biostarApi.login({
+        documentNumber: ingresoForm.numeroDocumento,
+        password: ingresoForm.contrasena,
+      });
 
       await accessApi.registerEntry({
         employeeId: employee.id,
