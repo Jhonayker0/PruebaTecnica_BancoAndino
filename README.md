@@ -1,6 +1,10 @@
 # PruebaTecnica_BancoAndino
 
-## Levantar el proyecto
+Sistema para la gestión de accesos de empleados en múltiples sedes, desarrollado como prueba técnica. Administra empleados, sedes y asignaciones. Registra accesos, importa datos desde Excel, simula la sincronización de eventos, visualiza indicadores en un dashboard y genera reportes exportables. Desarrollado con React, NestJS, Prisma y PostgreSQL. Desplegado utilizando Vercel, Render y Neon.
+
+Para el ingreso de usuarios asume que la contraseña es la misma que el documento.
+
+## Levantar el proyecto local
 
 Este proyecto queda listo para ejecutarse con Docker Compose. No necesitas instalar dependencias locales ni correr el backend o el frontend por separado.
 
@@ -33,6 +37,13 @@ docker compose up --build
 
 - Frontend: http://localhost:5173
 - Backend: http://localhost:3000
+
+## Proyecto desplegado
+
+- Frontend: https://prueba-tecnica-banco-andino-c7w0xhsms-jhonayker0s-projects.vercel.app/home (Vercel)
+- Backend: https://pruebatecnica-bancoandino.onrender.com/ (Render)
+
+
 
 ### Base de datos
 
@@ -90,6 +101,8 @@ docker compose down
 ## Documentos Adicionales
 Los entregables solicitados junto cos los chats con IA se encuentran dentro de la carpeta /docs/
 Además, adjunto todo el material de apoyo utilizado y creado durante el desarrollo de este proyecto.
+
+
 
 ---
 
