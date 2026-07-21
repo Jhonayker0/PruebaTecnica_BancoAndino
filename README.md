@@ -40,7 +40,7 @@ docker compose up --build
 
 ## Proyecto desplegado
 
-- Frontend: https://prueba-tecnica-banco-andino-c7w0xhsms-jhonayker0s-projects.vercel.app/home (Vercel)
+- Frontend: https://prueba-tecnica-banco-andino.vercel.app/home (Vercel)
 - Backend: https://pruebatecnica-bancoandino.onrender.com/ (Render)
 
 
