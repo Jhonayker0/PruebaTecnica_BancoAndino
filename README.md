@@ -66,5 +66,23 @@ docker compose down
 - Docker Compose
 
 ## Capturas de pantalla 
+### Función de Acceso
 <img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\access.png" alt="Función de Acceso" width="800" />
+
+### Sidebar
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\sidebar.png" alt="Sidebar" width="800" />
+
+### Gestión de Empleados
 <img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\empleados.png" alt="Gestión de Empleados" width="800" />
+
+### Función de Importar
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\import.png" alt="Función de importar" width="800" />
+
+### Gestión de Sedes
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\sede.png" alt="Gestión de sedes" width="800" />
+
+### Reporte Historico
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\history.png" alt="Reporte Historico" width="800" />
+
+### Dashboard
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\dashboard.png" alt="Dashboard" width="800" />
