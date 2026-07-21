@@ -18,7 +18,7 @@ export class PrismaAssignmentsRepository implements AssignmentsRepository {
         },
       });
     } catch (error) {
-      this.handlePrismaError(error, 'Employee is already assigned to this site');
+      this.handlePrismaError(error, 'El empleado ya está asignado a esa sede');
     }
   }
 
@@ -80,10 +80,10 @@ export class PrismaAssignmentsRepository implements AssignmentsRepository {
       }
 
       if (error.code === 'P2025') {
-        throw new Error('Employee or site not found');
+        throw new Error('Empleado o sede no encontrado para la asignación');
       }
     }
 
-    throw error instanceof Error ? error : new Error('Unexpected Prisma error');
+    throw error instanceof Error ? error : new Error('Error no esperado de Prisma');
   }
 }

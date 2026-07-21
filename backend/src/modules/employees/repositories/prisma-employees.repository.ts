@@ -105,6 +105,6 @@ export class PrismaEmployeesRepository implements EmployeesRepository {
       throw new DuplicateEntityError(message);
     }
 
-    throw error instanceof Error ? error : new Error('Unexpected Prisma error');
+    throw error instanceof Error ? error : new Error('Error no esperado de Prisma');
   }
 }
