@@ -13,5 +13,6 @@ import { PrismaAssignmentsRepository } from './repositories/prisma-assignments.r
       useClass: PrismaAssignmentsRepository,
     },
   ],
+  exports: [AssignmentsRepository],
 })
 export class AssignmentsModule {}

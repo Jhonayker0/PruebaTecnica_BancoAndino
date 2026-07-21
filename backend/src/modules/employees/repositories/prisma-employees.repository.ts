@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Employee, Prisma } from '@prisma/client';
+import { Employee, Prisma, TypeDoc } from '@prisma/client';
 import { DuplicateEntityError } from '../../../common/exceptions/repository-exceptions';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { EmployeeWithSites, EmployeesRepository } from './employees.repository';
@@ -12,7 +12,7 @@ export class PrismaEmployeesRepository implements EmployeesRepository {
     try {
       return await this.prisma.employee.create({ data });
     } catch (error) {
-      this.handlePrismaError(error, 'Employee already exists with the same unique value');
+      this.handlePrismaError(error, 'El empleado ya existe con un valor único repetido');
     }
   }
 
@@ -53,6 +53,37 @@ export class PrismaEmployeesRepository implements EmployeesRepository {
     });
   }
 
+  async findByEmployeeCode(employeeCode: string): Promise<EmployeeWithSites | null> {
+    return this.prisma.employee.findUnique({
+      where: { employeeCode },
+      include: {
+        employeeSites: {
+          include: {
+            site: true,
+          },
+        },
+      },
+    });
+  }
+
+  async findByTypeDocAndDocumentNumber(typeDoc: TypeDoc, documentNumber: string): Promise<EmployeeWithSites | null> {
+    return this.prisma.employee.findUnique({
+      where: {
+        typeDoc_documentNumber: {
+          typeDoc,
+          documentNumber,
+        },
+      },
+      include: {
+        employeeSites: {
+          include: {
+            site: true,
+          },
+        },
+      },
+    });
+  }
+
   async existsById(id: number): Promise<boolean> {
     const employee = await this.prisma.employee.findUnique({ where: { id }, select: { id: true } });
     return Boolean(employee);
@@ -65,7 +96,7 @@ export class PrismaEmployeesRepository implements EmployeesRepository {
         data,
       });
     } catch (error) {
-      this.handlePrismaError(error, 'Employee already exists with the same unique value');
+      this.handlePrismaError(error, 'El empleado ya existe con un valor único repetido');
     }
   }
 

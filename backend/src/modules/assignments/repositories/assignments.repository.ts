@@ -12,5 +12,6 @@ export abstract class AssignmentsRepository {
   abstract findSitesByEmployee(employeeId: number): Promise<AssignmentWithRelations[]>;
   abstract findEmployeesBySite(siteId: number): Promise<AssignmentWithRelations[]>;
   abstract findById(id: number): Promise<AssignmentWithRelations | null>;
+  abstract findByEmployeeIdAndSiteId(employeeId: number, siteId: number): Promise<AssignmentWithRelations | null>;
   abstract delete(id: number): Promise<void>;
 }

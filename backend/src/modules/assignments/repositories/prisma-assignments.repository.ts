@@ -54,6 +54,21 @@ export class PrismaAssignmentsRepository implements AssignmentsRepository {
     });
   }
 
+  findByEmployeeIdAndSiteId(employeeId: number, siteId: number): Promise<AssignmentWithRelations | null> {
+    return this.prisma.employeeSite.findUnique({
+      where: {
+        employeeId_siteId: {
+          employeeId,
+          siteId,
+        },
+      },
+      include: {
+        employee: true,
+        site: true,
+      },
+    });
+  }
+
   async delete(id: number): Promise<void> {
     await this.prisma.employeeSite.delete({ where: { id } });
   }

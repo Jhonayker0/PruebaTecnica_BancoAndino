@@ -5,8 +5,9 @@ import { SitesModule } from './modules/sites/sites.module';
 import { AssignmentsModule } from './modules/assignments/assignments.module';
 import { AccessModule } from './modules/access/access.module';
 import { CatalogsModule } from './modules/catalogs/catalogs.module';
+import { ImportsModule } from './modules/imports/imports.module';
 
 @Module({
-  imports: [PrismaModule, EmployeesModule, SitesModule, AssignmentsModule, AccessModule, CatalogsModule],
+  imports: [PrismaModule, EmployeesModule, SitesModule, AssignmentsModule, AccessModule, CatalogsModule, ImportsModule],
 })
 export class AppModule {}

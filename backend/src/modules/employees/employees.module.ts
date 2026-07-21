@@ -13,5 +13,6 @@ import { PrismaEmployeesRepository } from './repositories/prisma-employees.repos
       useClass: PrismaEmployeesRepository,
     },
   ],
+  exports: [EmployeesRepository],
 })
 export class EmployeesModule {}

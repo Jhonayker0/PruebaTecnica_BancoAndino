@@ -1,0 +1,192 @@
+.imports-main {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+  box-sizing: border-box;
+}
+
+.imports-card {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 44px 40px 40px;
+  box-shadow: 0 30px 70px rgba(3, 7, 15, 0.5);
+}
+
+.imports-notes {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(8, 12, 20, 0.4);
+}
+
+.imports-notes p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.imports-notes p + p {
+  margin-top: 6px;
+}
+
+.import-form {
+  display: grid;
+  gap: 14px;
+}
+
+.import-file-field {
+  display: grid;
+  gap: 8px;
+}
+
+.import-file-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.import-file-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(8, 12, 20, 0.72);
+  color: var(--text-primary);
+}
+
+.import-file-input::file-selector-button {
+  margin-right: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.import-feedback {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  border: 1px solid transparent;
+}
+
+.import-feedback-error {
+  background: rgba(184, 67, 41, 0.16);
+  border-color: rgba(184, 67, 41, 0.35);
+  color: #ffd6cf;
+}
+
+.import-results {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.import-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.import-summary-card {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(8, 12, 20, 0.42);
+  border: 1px solid var(--border-subtle);
+}
+
+.import-summary-head,
+.import-results-head,
+.import-rejected-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.import-summary-title,
+.import-results-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.import-summary-count {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.import-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.import-summary-grid strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.08rem;
+  color: var(--text-primary);
+}
+
+.import-summary-label {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.import-rejected-list {
+  display: grid;
+  gap: 12px;
+}
+
+.import-rejected-item {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(8, 12, 20, 0.42);
+  border: 1px solid var(--border-subtle);
+}
+
+.import-rejected-identifier,
+.import-rejected-reason {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+}
+
+.import-empty-state {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 480px) {
+  .imports-card {
+    padding: 34px 22px 30px;
+  }
+
+  .import-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .import-summary-grid,
+  .import-summary-head,
+  .import-results-head,
+  .import-rejected-top {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+}

@@ -14,12 +14,25 @@ interface MenuSection {
 
 const MENU_SECTIONS: MenuSection[] = [
   {
+    id: 'home',
+    label: 'Acceso',
+    items: [
+      { label: 'Ingreso o Salida', route: '/home' },
+    ],
+  },
+  {
+    id: 'importar',
+    label: 'Importar',
+    items: [
+      { label: 'Importar empleados, sedes y asignaciones', route: '/imports' },
+    ],
+  },
+  {
     id: 'empleados',
     label: 'Empleados',
     items: [
       { label: 'Gestionar empleados', route: '/employees' },
       { label: 'Asignar / remover sedes', route: '/assignments' },
-      { label: 'Importar empleados', route: '/imports' },
     ],
   },
   {

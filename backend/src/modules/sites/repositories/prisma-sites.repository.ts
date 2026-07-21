@@ -45,6 +45,15 @@ export class PrismaSitesRepository implements SitesRepository {
     });
   }
 
+  async findBySiteCode(siteCode: string): Promise<SiteWithAssignments | null> {
+    return this.prisma.site.findUnique({
+      where: { siteCode },
+      include: {
+        employeeSites: true,
+      },
+    });
+  }
+
   async existsById(id: number): Promise<boolean> {
     const site = await this.prisma.site.findUnique({ where: { id }, select: { id: true } });
     return Boolean(site);

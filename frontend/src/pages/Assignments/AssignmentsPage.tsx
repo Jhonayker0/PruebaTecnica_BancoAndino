@@ -263,7 +263,7 @@ export function AssignmentsPage() {
               aria-expanded={activeAction === 'empleado'}
             >
               <span className="action-icon action-icon-search" aria-hidden="true" />
-              Por empleado
+              Buscar por empleado
             </button>
             <button
               type="button"
@@ -271,8 +271,8 @@ export function AssignmentsPage() {
               onClick={() => handleActionToggle('sede')}
               aria-expanded={activeAction === 'sede'}
             >
-              <span className="action-icon action-icon-refresh" aria-hidden="true" />
-              Por sede
+              <span className="action-icon action-icon-search" aria-hidden="true" />
+              Buscar por sede
             </button>
             <button
               type="button"
@@ -403,7 +403,6 @@ export function AssignmentsPage() {
                       <h3 className="assignment-result-name">{employeeLabel(assignment.employee)}</h3>
                       <p className="assignment-result-meta">{siteLabel(assignment.site)}</p>
                     </div>
-                    <span className="assignment-chip">ID {assignment.id}</span>
                   </div>
 
                   <div className="assignment-result-actions">

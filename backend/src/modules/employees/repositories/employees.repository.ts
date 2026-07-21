@@ -1,4 +1,4 @@
-import { Employee, Prisma } from '@prisma/client';
+import { Employee, Prisma, TypeDoc } from '@prisma/client';
 
 export type EmployeeWithSites = Prisma.EmployeeGetPayload<{
   include: {
@@ -14,6 +14,8 @@ export abstract class EmployeesRepository {
   abstract create(data: Prisma.EmployeeCreateInput): Promise<Employee>;
   abstract findMany(search?: string): Promise<EmployeeWithSites[]>;
   abstract findById(id: number): Promise<EmployeeWithSites | null>;
+  abstract findByEmployeeCode(employeeCode: string): Promise<EmployeeWithSites | null>;
+  abstract findByTypeDocAndDocumentNumber(typeDoc: TypeDoc, documentNumber: string): Promise<EmployeeWithSites | null>;
   abstract existsById(id: number): Promise<boolean>;
   abstract update(id: number, data: Prisma.EmployeeUpdateInput): Promise<Employee>;
 }

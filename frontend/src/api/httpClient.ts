@@ -4,10 +4,26 @@ const baseURL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 export const httpClient = axios.create({
   baseURL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
   timeout: 15000,
+});
+
+httpClient.interceptors.request.use((config) => {
+  const headers = config.headers;
+
+  if (config.data instanceof FormData) {
+    if (headers) {
+      delete headers['Content-Type'];
+      delete headers['content-type'];
+    }
+
+    return config;
+  }
+
+  if (config.data && headers && !headers['Content-Type'] && !headers['content-type']) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  return config;
 });
 
 httpClient.interceptors.response.use(

@@ -13,5 +13,6 @@ import { SitesRepository } from './repositories/sites.repository';
       useClass: PrismaSitesRepository,
     },
   ],
+  exports: [SitesRepository],
 })
 export class SitesModule {}
