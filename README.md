@@ -38,13 +38,6 @@ docker compose up --build
 - Frontend: http://localhost:5173
 - Backend: http://localhost:3000
 
-## Proyecto desplegado
-
-- Frontend: https://prueba-tecnica-banco-andino.vercel.app/home (Vercel)
-- Backend: https://pruebatecnica-bancoandino.onrender.com/ (Render)
-
-
-
 ### Base de datos
 
 - Host: postgres
@@ -58,6 +51,12 @@ docker compose up --build
 ```bash
 docker compose down
 ```
+
+## Proyecto desplegado
+
+- Frontend: https://prueba-tecnica-banco-andino.vercel.app/home (Vercel)
+- Backend: https://pruebatecnica-bancoandino.onrender.com/ (Render)
+
 
 ## Tecnologías usadas
 ### Frontend
