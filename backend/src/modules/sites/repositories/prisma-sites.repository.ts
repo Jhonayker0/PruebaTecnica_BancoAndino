@@ -12,7 +12,7 @@ export class PrismaSitesRepository implements SitesRepository {
     try {
       return await this.prisma.site.create({ data });
     } catch (error) {
-      this.handlePrismaError(error, 'Site already exists with the same unique value');
+      this.handlePrismaError(error, 'Sede ya existe con el mismo valor único');
     }
   }
 
@@ -66,7 +66,7 @@ export class PrismaSitesRepository implements SitesRepository {
         data,
       });
     } catch (error) {
-      this.handlePrismaError(error, 'Site already exists with the same unique value');
+      this.handlePrismaError(error, 'Sede ya existe con el mismo valor único');
     }
   }
 
@@ -75,6 +75,6 @@ export class PrismaSitesRepository implements SitesRepository {
       throw new DuplicateEntityError(message);
     }
 
-    throw error instanceof Error ? error : new Error('Unexpected Prisma error');
+    throw error instanceof Error ? error : new Error('error inesperado de Prisma');
   }
 }

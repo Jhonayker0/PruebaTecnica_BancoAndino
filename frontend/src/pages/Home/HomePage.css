@@ -92,7 +92,7 @@
 .home-card {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 540px;
   background: var(--bg-panel);
   border: 1px solid var(--border-subtle);
   border-radius: 18px;

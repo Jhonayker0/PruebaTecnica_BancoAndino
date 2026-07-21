@@ -7,7 +7,7 @@ import { AccessLogWithRelations, AccessRepository } from './access.repository';
 export class PrismaAccessRepository implements AccessRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  findEmployeeSiteByEmployeeAndSite(employeeId: number, siteId: number): Promise<{ id: number } | null> {
+  findEmployeeSiteByEmployeeAndSite(employeeId: number, siteId: number) {
     return this.prisma.employeeSite.findUnique({
       where: {
         employeeId_siteId: {
@@ -15,7 +15,10 @@ export class PrismaAccessRepository implements AccessRepository {
           siteId,
         },
       },
-      select: { id: true },
+      include: {
+        employee: true,
+        site: true,
+      },
     });
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { DuplicateEntityError } from '../../../common/exceptions/repository-exceptions';
+import { DuplicateEntityError, RestrictedEntityError } from '../../../common/exceptions/repository-exceptions';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { AssignmentWithRelations, AssignmentsRepository } from './assignments.repository';
 
@@ -70,7 +70,18 @@ export class PrismaAssignmentsRepository implements AssignmentsRepository {
   }
 
   async delete(id: number): Promise<void> {
-    await this.prisma.employeeSite.delete({ where: { id } });
+    try {
+      await this.prisma.$transaction([
+        this.prisma.accessLog.deleteMany({ where: { employeeSiteId: id } }),
+        this.prisma.employeeSite.delete({ where: { id } }),
+      ]);
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+        throw new RestrictedEntityError('No se pudo eliminar la asignación porque ya no existe');
+      }
+
+      throw error instanceof Error ? error : new Error('Error no esperado de Prisma');
+    }
   }
 
   private handlePrismaError(error: unknown, message: string): never {

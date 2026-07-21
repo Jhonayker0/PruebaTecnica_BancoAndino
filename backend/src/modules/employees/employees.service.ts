@@ -39,7 +39,7 @@ export class EmployeesService {
     const employee = await this.employeesRepository.findById(id);
 
     if (!employee) {
-      throw new NotFoundException(`Employee with id ${id} not found`);
+      throw new NotFoundException(`Empleado con id ${id} no encontrado`);
     }
 
     return employee;
@@ -80,15 +80,15 @@ export class EmployeesService {
     const employeeExists = await this.employeesRepository.existsById(id);
 
     if (!employeeExists) {
-      throw new NotFoundException(`Employee with id ${id} not found`);
+      throw new NotFoundException(`Empleado con id ${id} no encontrado`);
     }
   }
 
   private handleRepositoryError(error: unknown): never {
     if (error instanceof DuplicateEntityError) {
-      throw new ConflictException('Employee already exists with the same unique value');
+      throw new ConflictException('El empleado ya existe con el mismo valor único');
     }
 
-    throw error instanceof Error ? error : new Error('Unexpected Prisma error');
+    throw error instanceof Error ? error : new Error('Error inesperado en el repositorio de empleados');
   }
 }

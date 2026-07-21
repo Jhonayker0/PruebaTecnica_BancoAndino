@@ -33,7 +33,7 @@ export class SitesService {
     const site = await this.sitesRepository.findById(id);
 
     if (!site) {
-      throw new NotFoundException(`Site with id ${id} not found`);
+      throw new NotFoundException(`Sede con id ${id} no encontrada`);
     }
 
     return site;
@@ -68,15 +68,15 @@ export class SitesService {
     const siteExists = await this.sitesRepository.existsById(id);
 
     if (!siteExists) {
-      throw new NotFoundException(`Site with id ${id} not found`);
+      throw new NotFoundException(`Sede con id ${id} no encontrada`);
     }
   }
 
   private handleRepositoryError(error: unknown): never {
     if (error instanceof DuplicateEntityError) {
-      throw new ConflictException('Site already exists with the same unique value');
+      throw new ConflictException('Sede ya existe con el mismo valor único');
     }
 
-    throw error instanceof Error ? error : new Error('Unexpected Prisma error');
+    throw error instanceof Error ? error : new Error('Error inesperado en el repositorio de sedes');
   }
 }

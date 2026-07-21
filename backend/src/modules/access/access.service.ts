@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { MovementType } from '@prisma/client';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { MovementType, Status } from '@prisma/client';
 import { AccessRepository, AccessLogWithRelations } from './repositories/access.repository';
 import { RegisterAccessDto } from './dto/register-access.dto';
 
@@ -79,10 +79,41 @@ export class AccessService {
     );
 
     if (!employeeSite) {
-      throw new NotFoundException('Employee is not assigned to the selected site');
+      throw new NotFoundException('Empleado no asignado a la sede seleccionada');
+    }
+
+    if (employeeSite.site.status === Status.INACTIVE) {
+      throw new BadRequestException('No se puede acceder a una sede inactiva');
+    }
+
+    const latestMovement = await this.getLatestMovementForEmployeeSite(registerAccessDto.employeeId, registerAccessDto.siteId);
+
+    if (movementType === MovementType.ENTRY) {
+      if (employeeSite.employee.status !== Status.ACTIVE) {
+        throw new BadRequestException('El empleado está inactivo o retirado y no puede ingresar');
+      }
+
+      if (latestMovement?.movementType === MovementType.ENTRY) {
+        throw new BadRequestException('No se puede ingresar porque tu último movimiento fue ingreso');
+      }
+    }
+
+    if (movementType === MovementType.EXIT) {
+      if (!latestMovement) {
+        throw new BadRequestException('No se puede salir si no has ingresado');
+      }
+
+      if (latestMovement.movementType === MovementType.EXIT) {
+        throw new BadRequestException('No se puede salir porque tu último movimiento fue salida');
+      }
     }
 
     return this.accessRepository.createMovement(employeeSite.id, movementType);
+  }
+
+  private async getLatestMovementForEmployeeSite(employeeId: number, siteId: number) {
+    const history = await this.accessRepository.findHistory(employeeId, siteId);
+    return history[0] ?? null;
   }
 
   private async getLatestMovements(): Promise<AccessState[]> {
