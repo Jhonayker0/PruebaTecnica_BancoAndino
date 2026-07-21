@@ -47,3 +47,24 @@ docker compose up --build
 ```bash
 docker compose down
 ```
+
+## Tecnologías usadas
+### Frontend
+- React
+- Vite
+- TypeScript
+- React Router
+- Axios
+
+### Backend
+- NestJS
+- Prisma ORM
+- PostgreSQL
+
+### Herramientas
+- Docker
+- Docker Compose
+
+## Capturas de pantalla 
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\access.png" alt="Función de Acceso" width="300" />
+
