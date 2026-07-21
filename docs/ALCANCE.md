@@ -40,3 +40,5 @@ Si contase con más tiempo, los puntos que priorizaría serían:
 - Documentar más a detalle el código, sus servicios, módulos, etc.
 
 - Limitar el aforo en cada sede de acuerdo al campo aforo_maximo.
+
+- Pulir detalles como hacer responsive el frontend, indicadores de carga de ser necesarios, placeholder, advertencias, etc.
