@@ -79,7 +79,7 @@ docker compose down
 <img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\import.png" alt="Función de importar" width="800" />
 
 ### Gestión de Sedes
-<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\sede.png" alt="Gestión de sedes" width="800" />
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\sedes.png" alt="Gestión de sedes" width="800" />
 
 ### Reporte Historico
 <img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\history.png" alt="Reporte Historico" width="800" />
