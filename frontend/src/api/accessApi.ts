@@ -5,6 +5,12 @@ export interface RegisterAccessPayload {
   siteId: number;
 }
 
+export interface AccessHistoryFilter {
+  siteId?: number;
+  from?: string;
+  to?: string;
+}
+
 export const accessApi = {
   registerEntry(payload: RegisterAccessPayload) {
     return httpClient.post('/access/entry', payload);
@@ -14,8 +20,15 @@ export const accessApi = {
     return httpClient.post('/access/exit', payload);
   },
 
-  findHistory(params?: { employeeId?: number; siteId?: number }) {
+  findHistory(params?: AccessHistoryFilter) {
     return httpClient.get('/access/history', { params });
+  },
+
+  exportHistory(params?: AccessHistoryFilter) {
+    return httpClient.get('/access/history/export', {
+      params,
+      responseType: 'blob',
+    });
   },
 
   getCurrentOccupancy() {

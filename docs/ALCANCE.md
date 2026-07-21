@@ -19,6 +19,7 @@
 4. **Manejo avanzado de errores:** no se profundizó en esta versión para no desviar tiempo del flujo principal. Más adelante incorporaría validaciones adicionales, trazabilidad más detallada y mejores mensajes de error.
 5. **Gestión de contratistas y visitantes:** por indicación del cliente no forma parte del desarrollo inicial.
 6. **Integración real con BioStar:** no se incluyó porque no existe un ambiente disponible para pruebas. La cobertura se deja mediante una integración simulada y la lógica quedará preparada para reemplazar el mock
+7. **Limite de aforo por Sede:** por limitaciones de tiempo he decidido dejarlo fuera del MVP, sin embargo, están todas las bases para su implementación.
 
 
 ## Prioridades con más tiempo
@@ -37,3 +38,5 @@ Si contase con más tiempo, los puntos que priorizaría serían:
 - Hacerle preguntas al cliente para extender el control de aforo y soportar niveles como pisos o áreas, manteniendo la lógica desarrollada para el control por sedes.
 
 - Documentar más a detalle el código, sus servicios, módulos, etc.
+
+- Limitar el aforo en cada sede de acuerdo al campo aforo_maximo.

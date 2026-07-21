@@ -39,15 +39,23 @@ export class PrismaAccessRepository implements AccessRepository {
     });
   }
 
-  findHistory(employeeId?: number, siteId?: number): Promise<AccessLogWithRelations[]> {
+  findHistory(filters?: { employeeId?: number; siteId?: number; from?: Date; to?: Date }): Promise<AccessLogWithRelations[]> {
     return this.prisma.accessLog.findMany({
       where: {
-        ...(employeeId || siteId
+        ...(filters?.employeeId || filters?.siteId || filters?.from || filters?.to
           ? {
               employeeSite: {
-                ...(employeeId ? { employeeId } : {}),
-                ...(siteId ? { siteId } : {}),
+                ...(filters?.employeeId ? { employeeId: filters.employeeId } : {}),
+                ...(filters?.siteId ? { siteId: filters.siteId } : {}),
               },
+              ...(filters?.from || filters?.to
+                ? {
+                    occurredAt: {
+                      ...(filters?.from ? { gte: filters.from } : {}),
+                      ...(filters?.to ? { lte: filters.to } : {}),
+                    },
+                  }
+                : {}),
             }
           : {}),
       },

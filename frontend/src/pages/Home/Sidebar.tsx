@@ -48,7 +48,7 @@ const MENU_SECTIONS: MenuSection[] = [
     items: [
       { label: 'Reporte de auditoría', route: '/reports/history' },
       { label: 'Reporte en tiempo real', route: '/reports/current' },
-      { label: 'Dashboards', route: '/dashboards' },
+      { label: 'Dashboards', route: '/dashboard' },
     ],
   },
   {

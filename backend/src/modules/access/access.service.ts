@@ -3,6 +3,7 @@ import { MovementType, Status } from '@prisma/client';
 import { AccessRepository, AccessLogWithRelations } from './repositories/access.repository';
 import { RegisterAccessDto } from './dto/register-access.dto';
 import { BiostarService } from '../biostar/biostar.service';
+import * as XLSX from 'xlsx';
 
 @Injectable()
 export class AccessService {
@@ -19,8 +20,13 @@ export class AccessService {
     return this.registerMovement(registerAccessDto, MovementType.EXIT);
   }
 
-  async findHistory(employeeId?: number, siteId?: number) {
-    const accessLogs = await this.accessRepository.findHistory(employeeId, siteId);
+  async findHistory(employeeId?: number, siteId?: number, from?: string, to?: string) {
+    const accessLogs = await this.accessRepository.findHistory({
+      ...(employeeId ? { employeeId } : {}),
+      ...(siteId ? { siteId } : {}),
+      ...(from ? { from: this.parseDateStart(from) } : {}),
+      ...(to ? { to: this.parseDateEnd(to) } : {}),
+    });
 
     return accessLogs.map((log) => ({
       id: log.id,
@@ -30,6 +36,31 @@ export class AccessService {
       employee: log.employeeSite.employee,
       site: log.employeeSite.site,
     }));
+  }
+
+  async exportHistory(siteId?: number, from?: string, to?: string) {
+    const rows = await this.findHistory(undefined, siteId, from, to);
+    const worksheetRows = rows.map((row) => ({
+      Fecha: row.occurredAt.toISOString(),
+      Movimiento: row.movementType,
+      Empleado: `${row.employee.firstName} ${row.employee.lastName}`,
+      Documento: row.employee.documentNumber,
+      Sede: row.site.name,
+      CodigoSede: row.site.siteCode,
+      Ciudad: row.site.city,
+      Pais: row.site.country,
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(worksheetRows);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Historico');
+
+    const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' }) as Buffer;
+
+    return {
+      filename: `reporte-historico-${new Date().toISOString().slice(0, 10)}.xlsx`,
+      buffer,
+    };
   }
 
   async getCurrentOccupancy() {
@@ -129,8 +160,28 @@ export class AccessService {
   }
 
   private async getLatestMovementForEmployeeSite(employeeId: number, siteId: number) {
-    const history = await this.accessRepository.findHistory(employeeId, siteId);
+    const history = await this.accessRepository.findHistory({ employeeId, siteId });
     return history[0] ?? null;
+  }
+
+  private parseDateStart(value: string): Date {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      throw new BadRequestException('La fecha inicial no es válida');
+    }
+
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+
+  private parseDateEnd(value: string): Date {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      throw new BadRequestException('La fecha final no es válida');
+    }
+
+    date.setHours(23, 59, 59, 999);
+    return date;
   }
 
   private async getLatestMovements(): Promise<AccessState[]> {

@@ -21,6 +21,11 @@ export type AccessLogWithRelations = Prisma.AccessLogGetPayload<{
 export abstract class AccessRepository {
   abstract findEmployeeSiteByEmployeeAndSite(employeeId: number, siteId: number): Promise<EmployeeSiteWithRelations | null>;
   abstract createMovement(employeeSiteId: number, movementType: MovementType): Promise<AccessLogWithRelations>;
-  abstract findHistory(employeeId?: number, siteId?: number): Promise<AccessLogWithRelations[]>;
+  abstract findHistory(filters?: {
+    employeeId?: number;
+    siteId?: number;
+    from?: Date;
+    to?: Date;
+  }): Promise<AccessLogWithRelations[]>;
   abstract findLatestMovements(): Promise<AccessLogWithRelations[]>;
 }

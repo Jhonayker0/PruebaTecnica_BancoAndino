@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
+import type { Response } from 'express';
 import { RegisterAccessDto } from './dto/register-access.dto';
 import { AccessService } from './access.service';
 
@@ -17,11 +18,23 @@ export class AccessController {
   }
 
   @Get('history')
-  findHistory(@Query('employeeId') employeeId?: string, @Query('siteId') siteId?: string) {
-    return this.accessService.findHistory(
-      employeeId ? Number(employeeId) : undefined,
-      siteId ? Number(siteId) : undefined,
-    );
+  findHistory(@Query('siteId') siteId?: string, @Query('from') from?: string, @Query('to') to?: string) {
+    return this.accessService.findHistory(undefined, siteId ? Number(siteId) : undefined, from, to);
+  }
+
+  @Get('history/export')
+  async exportHistory(
+    @Res() response: Response,
+    @Query('siteId') siteId?: string,
+    @Query('from') from?: string,
+    @Query('to') to?: string,
+  ) {
+    const exportedFile = await this.accessService.exportHistory(siteId ? Number(siteId) : undefined, from, to);
+
+    response.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    response.setHeader('Content-Disposition', `attachment; filename="${exportedFile.filename}"`);
+
+    return response.send(exportedFile.buffer);
   }
 
   @Get('occupancy')
