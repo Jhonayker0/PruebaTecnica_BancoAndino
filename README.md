@@ -66,5 +66,5 @@ docker compose down
 - Docker Compose
 
 ## Capturas de pantalla 
-<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\access.png" alt="Función de Acceso" width="300" />
-
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\access.png" alt="Función de Acceso" width="800" />
+<img src="\docs\archivos_adicionales\Capturas_pantalla_funcionalidades\empleados.png" alt="Gestión de Empleados" width="800" />
